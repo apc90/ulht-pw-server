@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.ulht.pw.dto.BaseDTO;
 
+import com.ulht.pw.dto.sales.SalesDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,4 +27,5 @@ public class ProductDTO extends BaseDTO {
 	private LocalDate expireDate;
 	private String brand;
 	private List<ProductPrecautionsDTO> productPrecautions = new ArrayList<>();
+	private List<SalesDTO> sales = new ArrayList<>();
 }
