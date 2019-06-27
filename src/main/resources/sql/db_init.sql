@@ -35,7 +35,7 @@ CREATE TABLE public.user_authority (
 DROP table if exists public.client cascade;
 CREATE TABLE public.client (
                                id BIGSERIAL NOT NULL,
-                               nif BIGSERIAL NOT NULL,
+                               nif numeric NOT NULL,
                                first_name varchar(50) NULL,
                                last_name varchar(50) NULL,
                                date_of_birth date NULL,
@@ -118,8 +118,8 @@ CREATE TABLE public.product (
                                 desription varchar(255) NULL,
                                 expire_date date NULL,
                                 brand varchar(255) null,
-                                price money NOT NULL,
-                                stock_id int8 NOT NULL,
+                                price float8 NOT NULL,
+                                quantity int4 NOT NULL,
                                 created_by varchar(50) NOT NULL,
                                 created_date timestamp NULL,
                                 last_modified_by varchar(50) NULL,
@@ -148,6 +148,7 @@ CREATE TABLE public.sales (
                               client_id int8 not null,
                               user_id int8 not null,
                               quantity int4 not NULL,
+                              total float8 not null,
                               created_by varchar(50) NOT NULL,
                               created_date timestamp NULL,
                               last_modified_by varchar(50) NULL,
@@ -168,6 +169,7 @@ CREATE TABLE public.product_sales (
 );
 
 DROP table if exists public.stock cascade;
+/*
 CREATE TABLE public.stock(
                             id BIGSERIAL NOT NULL,
                             product_id int8 NOT NULL,
@@ -180,12 +182,12 @@ CREATE TABLE public.stock(
                             CONSTRAINT pk_stock PRIMARY KEY(id),
                             CONSTRAINT fk_product_id FOREIGN KEY (product_id) REFERENCES public.product(id)
 );
-
+*/
 
 commit;
 
-INSERT INTO public.client (first_name,last_name,date_of_birth,created_by,created_date,last_modified_by,last_modified_date) VALUES
-('Pedro','Perdigão','2019-04-09','perdigaop','2019-04-09 16:38:47.110',NULL,NULL);
+INSERT INTO public.client (nif,first_name,last_name,date_of_birth,created_by,created_date,last_modified_by,last_modified_date) VALUES
+(250250250,'Pedro','Perdigão','2019-04-09','perdigaop','2019-04-09 16:38:47.110',NULL,NULL);
 INSERT INTO public.address (client_id,address,postal_code,created_by,created_date,last_modified_by,last_modified_date) VALUES
 (1,'Campo Grande 376','1749-024 Lisboa','perdigaop','2019-04-09 16:43:03.472',NULL,NULL)
 ,(1,'Av. José Malhoa 16','1070-159 Lisboa','perdigaop','2019-04-09 16:43:03.000',NULL,NULL);

@@ -20,46 +20,46 @@ import ma.glasnost.orika.MapperFacade;
 @RequiredArgsConstructor
 public class ProductService {
 
-	private static final String DOMAIN_NAME = "ProductEntity";
+    private static final String DOMAIN_NAME = "ProductEntity";
 
-	private final ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
-	private final MapperFacade mapper;
+    private final MapperFacade mapper;
 
-	public ProductDTO searchProductById(Long productId) {
-		ProductEntity product = productRepository.findById(productId)
-				.orElseThrow(() -> new ResourceNotFoundException(DOMAIN_NAME, "id", productId));
-		return mapper.map(product, ProductDTO.class);
-	}
+    public ProductDTO searchProductById(Long productId) {
+        ProductEntity product = productRepository.findById(productId)
+                .orElseThrow(() -> new ResourceNotFoundException(DOMAIN_NAME, "id", productId));
+        return mapper.map(product, ProductDTO.class);
+    }
 
-	public List<ProductDTO> findAllProducts() {
-		return mapper.mapAsList(productRepository.findAll(), ProductDTO.class);
-	}
+    public List<ProductDTO> findAllProducts() {
+        return mapper.mapAsList(productRepository.findAll(), ProductDTO.class);
+    }
 
-	@Transactional
-	public ProductDTO createProduct(ProductDTO product) {
-		ProductEntity productEntity = handleProductSave(product);
-		return mapper.map(productRepository.save(productEntity), ProductDTO.class);
-	}
+    @Transactional
+    public ProductDTO createProduct(ProductDTO product) {
+        ProductEntity productEntity = handleProductSave(product);
+        return mapper.map(productRepository.save(productEntity), ProductDTO.class);
+    }
 
-	@Transactional
-	public ProductDTO updateProduct(ProductDTO product) {
-		ProductEntity productEntity = handleProductSave(product);
-		return mapper.map(productRepository.save(productEntity), ProductDTO.class);
-	}
+    @Transactional
+    public ProductDTO updateProduct(ProductDTO product) {
+        ProductEntity productEntity = handleProductSave(product);
+        return mapper.map(productRepository.save(productEntity), ProductDTO.class);
+    }
 
-	private ProductEntity handleProductSave(ProductDTO product) {
-		ProductEntity productEntity = mapper.map(product, ProductEntity.class);
-		productEntity.getProductPrecautions().forEach(productPrecautions -> productPrecautions.setProduct(productEntity));
-		productEntity.getSales().forEach(s -> s.addProduct(productEntity));
-		return productEntity;
-	}
+    private ProductEntity handleProductSave(ProductDTO product) {
+        ProductEntity productEntity = mapper.map(product, ProductEntity.class);
+        productEntity.getProductPrecautions().forEach(productPrecautions -> productPrecautions.setProduct(productEntity));
+        productEntity.getSales().forEach(s -> s.addProduct(productEntity));
+        return productEntity;
+    }
 
-	@Transactional
-	public void deleteProductById(Long productId) {
-		productRepository.findById(productId).ifPresent(product -> {
-			productRepository.delete(product);
-			log.debug("Deleted Product: {}", product);
-		});
-	}
+    @Transactional
+    public void deleteProductById(Long productId) {
+        productRepository.findById(productId).ifPresent(product -> {
+            productRepository.delete(product);
+            log.debug("Deleted Product: {}", product);
+        });
+    }
 }

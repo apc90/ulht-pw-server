@@ -1,6 +1,8 @@
 package com.ulht.pw.domain;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Currency;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,16 +25,18 @@ public class ProductEntity extends BaseEntity {
 	private String productName;
 	private String productCode;
 	private String desription;
+	private double price;
+	private int quantity;
 	private LocalDate expireDate;
 	private String brand;
 
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<ProductPrecautionsEntity> productPrecautions = new HashSet<>();
-
+/*
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "stock_id", nullable = false)
 	private StockEntity stock;
-
+*/
 	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "product_sales", joinColumns = {

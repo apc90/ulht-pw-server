@@ -1,7 +1,9 @@
 package com.ulht.pw.dto.product;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.List;
 
 import com.ulht.pw.dto.BaseDTO;
@@ -24,6 +26,8 @@ public class ProductDTO extends BaseDTO {
 	private String productName;
 	private String productCode;
 	private String desription;
+	private double price;
+	private int quantity;
 	private LocalDate expireDate;
 	private String brand;
 	private List<ProductPrecautionsDTO> productPrecautions = new ArrayList<>();

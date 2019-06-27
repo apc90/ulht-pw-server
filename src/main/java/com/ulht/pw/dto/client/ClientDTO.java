@@ -1,5 +1,6 @@
 package com.ulht.pw.dto.client;
 
+import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ public class ClientDTO extends BaseDTO {
 	private String lastName;
 	private String firstName;
 	private LocalDate dateOfBirth;
+	private BigInteger nif;
 	private List<ContactDTO> contacts = new ArrayList<>();
 	private List<AddressDTO> addresses = new ArrayList<>();
 }

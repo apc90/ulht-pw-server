@@ -1,5 +1,6 @@
 package com.ulht.pw.domain;
 
+import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,6 +25,7 @@ public class ClientEntity extends BaseEntity {
 	private String lastName;
 	private String firstName;
 	private LocalDate dateOfBirth;
+	private BigInteger nif;
 
 	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<AddressEntity> addresses = new HashSet<>();
