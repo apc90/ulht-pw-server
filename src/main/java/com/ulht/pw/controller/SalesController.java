@@ -33,7 +33,7 @@ public class SalesController {
 	@GetMapping("/list")
 	public ResponseEntity<List<SalesDTO>> getAllSaless() {
 		log.debug("REST request to get all Saless");
-		return ResponseEntity.ok().body(salesService.findAllSaless());
+		return ResponseEntity.ok().body(salesService.findAllSales());
 	}
 
 	@PostMapping("/save")

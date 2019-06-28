@@ -68,8 +68,8 @@ public class ClientController {
 		return ResponseEntity.ok().body(result);
 	}
 
-	@DeleteMapping("/delete")
-	public ResponseEntity<Void> deleteClient(@PathVariable(value = "id") Long id) {
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<Void> clientProduct(@PathVariable(value = "id") Long id) {
 		log.debug("REST request to delete Client : {}", id);
 		clientService.deleteClientById(id);
 		return ResponseEntity.ok().build();

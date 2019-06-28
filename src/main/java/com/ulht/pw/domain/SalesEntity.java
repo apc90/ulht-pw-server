@@ -20,6 +20,7 @@ public class SalesEntity extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 
 	private int quantity;
+	private double total;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "client_id", nullable = false)

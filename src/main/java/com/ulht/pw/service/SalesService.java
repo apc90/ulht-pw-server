@@ -29,7 +29,7 @@ public class SalesService {
 		return mapper.map(sales, SalesDTO.class);
 	}
 
-	public List<SalesDTO> findAllSaless() {
+	public List<SalesDTO> findAllSales() {
 		return mapper.mapAsList(salesRepository.findAll(), SalesDTO.class);
 	}
 
