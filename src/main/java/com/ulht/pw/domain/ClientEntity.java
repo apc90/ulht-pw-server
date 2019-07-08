@@ -5,10 +5,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -22,6 +19,7 @@ import lombok.NoArgsConstructor;
 public class ClientEntity extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 
+	@Column(name="last_name")
 	private String lastName;
 	private String firstName;
 	private LocalDate dateOfBirth;
@@ -33,4 +31,8 @@ public class ClientEntity extends BaseEntity {
 	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<ContactEntity> contacts = new HashSet<>();
 
+	@Override
+	public String toString(){
+		return "Client " + nif;
+	}
 }

@@ -3,12 +3,7 @@ package com.ulht.pw.domain;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -62,4 +57,7 @@ public class UserEntity extends BaseEntity {
 
 	@BatchSize(size = 20)
 	private Set<AuthorityEntity> authorities = new HashSet<>();
+
+
+
 }

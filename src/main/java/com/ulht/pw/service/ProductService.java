@@ -51,7 +51,7 @@ public class ProductService {
     private ProductEntity handleProductSave(ProductDTO product) {
         ProductEntity productEntity = mapper.map(product, ProductEntity.class);
         productEntity.getProductPrecautions().forEach(productPrecautions -> productPrecautions.setProduct(productEntity));
-        productEntity.getSales().forEach(s -> s.addProduct(productEntity));
+        //productEntity.getSales().forEach(s -> s.addProduct(productEntity));
         return productEntity;
     }
 

@@ -144,7 +144,6 @@ CREATE TABLE public.product_precautions (
 DROP table if exists public.sales	 cascade;
 CREATE TABLE public.sales (
                               id BIGSERIAL NOT NULL,
-                              product_id int8 NOT NULL,
                               client_id int8 not null,
                               user_id int8 not null,
                               quantity int4 not NULL,
@@ -154,7 +153,6 @@ CREATE TABLE public.sales (
                               last_modified_by varchar(50) NULL,
                               last_modified_date timestamp NULL,
                               CONSTRAINT pk_sales PRIMARY KEY (id),
-                              CONSTRAINT fk_product_id FOREIGN KEY (product_id) REFERENCES public.product(id),
                               CONSTRAINT fk_client_id FOREIGN KEY (client_id) REFERENCES public.client(id),
                               CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES public.pw_user(id)
 );
@@ -163,6 +161,7 @@ DROP table if exists public.product_sales cascade;
 CREATE TABLE public.product_sales (
                                        product_id BIGSERIAL NOT NULL,
                                        sales_id BIGSERIAL NOT NULL,
+                                       quantity int4 NOT NULL,
                                        CONSTRAINT product_sales_pkey PRIMARY KEY (product_id, sales_id),
                                        CONSTRAINT fk_product_id FOREIGN KEY (product_id) REFERENCES public.product(id),
                                        CONSTRAINT fk_sales_id FOREIGN KEY (sales_id) REFERENCES public.sales(id)
@@ -197,6 +196,14 @@ INSERT INTO public.contact (client_id,contact_type,contact,created_by,created_da
 INSERT INTO public.pw_user (id,login,password_hash,first_name,last_name,email,created_by,created_date,last_modified_by,last_modified_date) VALUES
 (1,'user','$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K','User','User','user@localhost','system','2019-04-09 17:42:59.918',NULL,NULL)
 ,(2,'admin','$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC','Administrator','Administrator','admin@localhost','system','2019-04-09 17:43:46.676',NULL,NULL);
+INSERT INTO public.product(id, product_name, product_code, desription, expire_date, brand, price, quantity, created_by, created_date, last_modified_by, last_modified_date)  VALUES
+(1,'Ben-u-Ron',001,'Paracetamol','2020-04-09 16:38:47.110','Bayer',2.05,50,'perdigaop','2019-04-09 16:38:47.110',NULL,NULL),
+(2,'Brufen', 002,'Anti-Inflamatório','2022-01-10 20:40:47.110','Bayer',3.00,100,'perdigaop','2019-04-09 16:38:47.110',NULL,NULL);
+INSERT INTO public.sales (client_id,user_id,quantity,total,created_by,created_date,last_modified_by,last_modified_date) VALUES
+(1,1,10,20.03,'perdigaop','2019-04-09 16:38:47.110',NULL,NULL);
+INSERT INTO public.product_sales(product_id, sales_id, quantity) VALUES
+(1,1,5),
+(2,1,5);
 INSERT INTO public.authority (name) VALUES
 ('ROLE_ADMIN')
 ,('ROLE_USER');

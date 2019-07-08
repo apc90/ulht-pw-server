@@ -10,6 +10,7 @@ import ma.glasnost.orika.MapperFacade;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Log4j2
@@ -30,6 +31,9 @@ public class SalesService {
 	}
 
 	public List<SalesDTO> findAllSales() {
+		List<SalesEntity> lista = salesRepository.findAll();
+		List<SalesDTO> list = mapper.mapAsList(salesRepository.findAll(), SalesDTO.class);
+		System.out.println(list);
 		return mapper.mapAsList(salesRepository.findAll(), SalesDTO.class);
 	}
 
@@ -47,7 +51,7 @@ public class SalesService {
 
 	private SalesEntity handleSalesSave(SalesDTO sales) {
 		SalesEntity salesEntity = mapper.map(sales, SalesEntity.class);
-		salesEntity.getProducts().forEach(p -> p.addSales(salesEntity));
+		//salesEntity.getProducts().forEach(p -> p.addSales(salesEntity));
 		return salesEntity;
 	}
 

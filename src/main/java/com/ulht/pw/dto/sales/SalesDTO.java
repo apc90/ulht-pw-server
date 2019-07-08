@@ -21,6 +21,6 @@ public class SalesDTO extends BaseDTO {
 	private UserDTO user;
 	private ClientDTO client;
 	private List<ProductDTO> products = new ArrayList<>();
-	private int qty;
+	private int quantity;
 	private double total;
 }

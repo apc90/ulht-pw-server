@@ -26,6 +26,12 @@ public class ClientService {
 
 	private final MapperFacade mapper;
 
+	public ClientDTO searchClientByNif(Long clientNif) {
+		ClientEntity client = clientRepository.findByNif(clientNif)
+				.orElseThrow(() -> new ResourceNotFoundException(DOMAIN_NAME, "nif", clientNif));
+		return mapper.map(client, ClientDTO.class);
+	}
+
 	public ClientDTO searchClientById(Long clientId) {
 		ClientEntity client = clientRepository.findById(clientId)
 				.orElseThrow(() -> new ResourceNotFoundException(DOMAIN_NAME, "id", clientId));

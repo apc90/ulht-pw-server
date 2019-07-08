@@ -8,7 +8,9 @@ import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,19 +24,28 @@ public class SalesEntity extends BaseEntity {
 	private int quantity;
 	private double total;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "client_id", nullable = false)
 	private ClientEntity client;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
 	private UserEntity user;
 
-	@ManyToMany(mappedBy = "sales")
-	private Set<ProductEntity> products = new HashSet<>();
+	@JsonIgnore
+	@ManyToMany
+	@JoinTable(name = "product_sales",
+			joinColumns = @JoinColumn(name = "product_id"),
+			inverseJoinColumns = @JoinColumn(name = "sales_id")
+	)
+	private List<ProductEntity> products = new ArrayList<>();
 
 	public void addProduct (ProductEntity p){
 		products.add(p);
+	}
+	@Override
+	public String toString(){
+		return "Sale " + this.getId();
 	}
 
 
